@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Test</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+    function getWeather(){
+     $(document).ready(function(){
+     $.ajax({
+      'url': "//api.openweathermap.org/data/2.5/weather",
+      'type': 'GET',
+      'data': {'q':'Boulder,co','APPID':'d1d74b103856934ce84ef77db658855c'},
+      'success':function(response){
+	console.log(response);
+	var text = "Temperature is: " + (response.main.temp-273.15) +" celsius";  
+	text += "<br>Humidity: " + response.main.humidity + "%";
+	text += "<br>Wind Speed: " + response.wind.speed + "m/s";
+	$('#weather').html(text);
+       }
+      });
+     });
+    };  
+  </script>
+  </head>
+  <body>
+    <h1>Hello World, this the Weather REST API</h1>
+	Location: <input type="text" id="location" value="Boulder,CO"></input>
+	<input type="button" value="Check Weather" onclick="getWeather();"></input>
+	<div id="weather"></div>
+   </body>
+</html>
